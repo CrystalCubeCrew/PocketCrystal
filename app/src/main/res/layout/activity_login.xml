@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorPrimaryDark"
     tools:context="edu.temple.crystalcube11.LoginActivity">
 
     <EditText
@@ -22,18 +23,8 @@
         android:hint="username"
         android:layout_alignParentStart="true"
         android:selectAllOnFocus="false"
-        android:fontFamily="sans-serif" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editTextPassID"
-        android:layout_below="@+id/editTextEmailID"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:hint="password" />
+        android:fontFamily="sans-serif"
+        android:background="@color/colorWhite"/>
 
     <Button
         android:text="Log In"
@@ -44,6 +35,19 @@
         android:layout_marginTop="32dp"
         android:id="@+id/loginButtonID"
         android:elevation="0dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:textColor="@color/colorWhite" />
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editTextPassID"
+        android:hint="password"
+        android:background="@color/colorWhite"
+        android:layout_below="@+id/editTextEmailID"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

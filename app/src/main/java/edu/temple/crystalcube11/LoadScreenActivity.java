@@ -15,7 +15,7 @@ public class LoadScreenActivity extends AppCompatActivity {
         Thread timer = new Thread() {
             public void run() {
                 try {
-                    sleep(4000);
+                    sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

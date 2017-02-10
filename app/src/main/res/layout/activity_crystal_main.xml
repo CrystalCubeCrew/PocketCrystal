@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_crystal_main"
     android:layout_width="match_parent"
@@ -8,58 +9,35 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorPrimaryDark"
     tools:context="edu.temple.crystalcube11.CrystalMainActivity">
 
-    <Button
-        android:text="Music"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        app:srcCompat="@drawable/bluegearicon"
+        android:id="@+id/option_button"
+        android:scaleType="centerCrop"
+        android:background="@color/colorPrimaryDark"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="61dp"
-        android:id="@+id/Button" />
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 
-    <Button
-        android:text="Todo List"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/Button"
+    <Spinner
+        android:id="@+id/spinner_view"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="56dp"
-        android:id="@+id/button2" />
+        android:spinnerMode="dialog"
+        android:paddingBottom="1dp"
+        android:paddingEnd="1dp"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp"
+        android:paddingStart="1dp"
+        android:paddingTop="0dp"
+        android:padding="1dp"
+        android:layout_height="35dp"
+        android:layout_width="80dp"
+        android:elevation="4dp"
+        tools:background="spinner_" />
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Button"
-        android:layout_alignStart="@+id/Button"
-        android:layout_marginTop="66dp"
-        android:id="@+id/button3" />
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button3"
-        android:layout_alignStart="@+id/button2"
-        android:id="@+id/button4" />
-
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3"
-        android:layout_alignStart="@+id/button3"
-        android:layout_marginTop="79dp"
-        android:id="@+id/button5" />
-
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button5"
-        android:layout_alignEnd="@+id/button4"
-        android:id="@+id/button6" />
 </RelativeLayout>

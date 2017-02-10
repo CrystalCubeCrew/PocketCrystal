@@ -15,14 +15,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText userNameET = (EditText) findViewById(R.id.editTextEmailID);
+        EditText usernameET = (EditText) findViewById(R.id.editTextEmailID);
         EditText passwordET = (EditText) findViewById(R.id.editTextPassID);
         Button loginBT = (Button) findViewById(R.id.loginButtonID);
+
+        // convert input to string
+        final String username = usernameET.getText().toString().trim();
+        final String password = passwordET.getText().toString().trim();
 
         loginBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (true) { // TODO: 2/2/17 verify credential with db
                     // go to CrystalMainActivity
                     Intent myIntent = new Intent(LoginActivity.this, CrystalMainActivity.class);
