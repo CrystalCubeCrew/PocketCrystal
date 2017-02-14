@@ -17,16 +17,19 @@ public class CrystalMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crystal_main);
 
         Spinner mySpinner= (Spinner) findViewById(R.id.spinner_view);
-        String[] crystalFunctions = {"Home", "Reminder", "Music", "News", "Weather"};
+        String[] crystalFunctions = {"Home", "Reminder", "Music", "To-do List"};
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, crystalFunctions);
 
         mySpinner.setAdapter(myAdapter);
 
+        //todo make option button work; add options
+
         AdapterView.OnItemSelectedListener myOISL = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //todo connect to cloud for functionality
+                //todo create activity for each functions
                 Toast.makeText(CrystalMainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
             }
 
