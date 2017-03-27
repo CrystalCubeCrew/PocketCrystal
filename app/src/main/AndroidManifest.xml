@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".CrystalMainActivity"></activity>
+        <activity android:name=".CrystalMainActivity" />
+        <activity android:name=".WeatherActivity"></activity>
     </application>
 
 </manifest>

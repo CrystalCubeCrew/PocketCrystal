@@ -1,11 +1,13 @@
 package edu.temple.crystalcube11;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +19,7 @@ public class CrystalMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crystal_main);
 
         Spinner mySpinner= (Spinner) findViewById(R.id.spinner_view);
-        String[] crystalFunctions = {"Home", "Reminder", "Music", "To-do List"};
+        String[] crystalFunctions = {"Home", "Reminder", "Music", "To-do List", "Weather"};
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, crystalFunctions);
 
@@ -30,7 +32,19 @@ public class CrystalMainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //todo connect to cloud for functionality
                 //todo create activity for each functions
-                Toast.makeText(CrystalMainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CrystalMainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CrystalMainActivity.this, ""+i , Toast.LENGTH_SHORT).show();
+
+
+
+                Intent mIntent;
+
+                switch (i) {
+                    case 4 :
+                        mIntent = new Intent(CrystalMainActivity.this, WeatherActivity.class);
+                        startActivity(mIntent);
+                        break;
+                }
             }
 
             @Override
