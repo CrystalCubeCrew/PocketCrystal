@@ -37,5 +37,40 @@
         android:elevation="4dp"
         tools:background="spinner_" />
 
+    <TextView
+        android:text="User ID:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_id_label"
+        android:layout_below="@+id/imageButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="121dp"
+        android:textSize="16sp"
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/user_name_edit_text"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/user_id_edit_text"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/user_id_edit_text"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:layout_alignBaseline="@+id/user_id_label"
+        android:layout_alignBottom="@+id/user_id_label"
+        android:layout_alignStart="@+id/user_name_edit_text" />
+
 
 </RelativeLayout>

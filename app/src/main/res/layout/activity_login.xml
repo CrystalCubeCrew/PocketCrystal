@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,82 +11,14 @@
     android:background="@color/colorPrimaryDark"
     tools:context="edu.temple.crystalcube11.LoginActivity">
 
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="textEmailAddress"-->
-        <!--android:ems="10"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_marginTop="173dp"-->
-        <!--android:id="@+id/editTextEmailID"-->
-        <!--android:hint="username"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:selectAllOnFocus="false"-->
-        <!--android:fontFamily="sans-serif"-->
-        <!--android:background="@color/colorWhite"-->
-        <!--tools:visibility="invisible"/>-->
-
-    <!--<Button-->
-        <!--android:text="Log In"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/editTextPassID"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="32dp"-->
-        <!--android:id="@+id/loginButtonID"-->
-        <!--android:elevation="0dp"-->
-        <!--android:backgroundTint="@color/colorAccent"-->
-        <!--android:textColor="@color/colorPrimaryDark"-->
-        <!--tools:visibility="invisible"/>-->
-
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="textPassword"-->
-        <!--android:ems="10"-->
-        <!--android:id="@+id/editTextPassID"-->
-        <!--android:hint="password"-->
-        <!--android:background="@color/colorWhite"-->
-        <!--android:layout_below="@+id/editTextEmailID"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_marginTop="17dp"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--tools:visibility="invisible"/>-->
-
-    <!--<TextView-->
-        <!--android:text="Sign Up"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="14dp"-->
-        <!--android:id="@+id/signUpId"-->
-        <!--android:textColor="@android:color/holo_blue_bright"-->
-        <!--android:layout_below="@+id/loginButtonID"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--tools:visibility="invisible"/>-->
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Firebase User ID: 123456789abc"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signed_out"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/sign_out_and_disconnect"
+        android:layout_alignStart="@+id/face_camera_btn"
+        android:layout_marginBottom="12dp" />
 
     <LinearLayout
         android:id="@+id/sign_out_and_disconnect"
@@ -113,6 +46,38 @@
             android:layout_weight="1"
             android:text="disconnect"/>
     </LinearLayout>
+
+    <Button
+        android:text="Face Login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/face_camera_btn"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/firstname_edit_text"
+        android:textColor="@android:color/white"
+        android:hint="first name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="65dp"
+        android:layout_alignEnd="@+id/lastname_edit_text" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/lastname_edit_text"
+        android:textColor="@android:color/white"
+        android:hint="last name"
+        android:layout_below="@+id/firstname_edit_text"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
