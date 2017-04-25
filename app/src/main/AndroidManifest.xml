@@ -26,9 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FaceLoginActivity"/>
+        <activity android:name=".OptionActivity"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".CrystalMainActivity" />
-        <activity android:name=".WeatherActivity"></activity>
+        <activity android:name=".ToDoListActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

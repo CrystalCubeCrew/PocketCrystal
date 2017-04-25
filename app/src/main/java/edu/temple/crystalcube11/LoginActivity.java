@@ -86,11 +86,9 @@ public class LoginActivity extends AppCompatActivity implements
 
     private Button faceCapture;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private ImageView imageView;
     private String TAG2 = "JSONpost";
     private EditText firstName;
     private EditText lastName;
-    private Uri fileUri;
 
 
     @Override
@@ -164,13 +162,13 @@ public class LoginActivity extends AppCompatActivity implements
         };
 
 
+
     }
 
     private void dispatchTakePictureIntent() {
         // method to create intent for image capture
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        fileUri = getOutputMediaFileUri();
-//        takePictureIntent.putExtra( MediaStore.EXTRA_OUTPUT,  fileUri);
+
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
@@ -247,14 +245,14 @@ public class LoginActivity extends AppCompatActivity implements
 
 
 //todo get full size captured image
-//            BitmapFactory.Options options = new BitmapFactory.Options();
-//            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-//            Bitmap bitmap = BitmapFactory.decodeFile(String.valueOf(fileUri), options);
 
             String photoString = getStringFromBitmap(photo_bitmap);
 
             // send photo string to method to be post to server
             sendJson(photoString);
+
+            // check if user have profile
+
 
             // sign in success start main activity
             Intent mIntent = new Intent(LoginActivity.this, CrystalMainActivity.class);

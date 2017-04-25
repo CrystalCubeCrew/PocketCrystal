@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="edu.temple.crystalcube11.CrystalMainActivity">
+
+    <Button
+        android:text="Face Login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/face_camera_btn"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/firstname_edit_text"
+        android:textColor="@android:color/white"
+        android:hint="first name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="65dp"
+        android:layout_alignEnd="@+id/lastname_edit_text" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/lastname_edit_text"
+        android:textColor="@android:color/white"
+        android:hint="last name"
+        android:layout_below="@+id/firstname_edit_text"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

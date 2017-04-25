@@ -1,13 +1,17 @@
 package edu.temple.crystalcube11;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -18,13 +22,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class CrystalMainActivity extends AppCompatActivity {
     private String TAG = "onDataChange";
 
-    private EditText userID_ET;
-    private EditText user_first_name_ET;
+
+    private ImageButton optionMenu;
+    TextView messageArea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,62 +43,45 @@ public class CrystalMainActivity extends AppCompatActivity {
 
         // read firebase data =========================
         // Get a reference to our users
-        userID_ET = (EditText) findViewById(R.id.user_id_edit_text);
-        user_first_name_ET = (EditText) findViewById(R.id.user_name_edit_text);
+
+        optionMenu = (ImageButton) findViewById(R.id.option_button);
+        messageArea = (TextView) findViewById(R.id.tv_long);
+
+        // scrolling text view for logs
+        messageArea.setMovementMethod(new ScrollingMovementMethod());
+
+        // option menu
+        optionMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent optionIntent = new Intent(CrystalMainActivity.this, OptionActivity.class);
+                startActivity(optionIntent);
+            }
+        });
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference ref = database.getReference("crystalCubes/crystal_chan_6/user");
+        final DatabaseReference logsRef = database.getReference("crystalCubes/crystal_chan_6/user/ff629b29-9e3a-4de3-9304-2bf209dd9c39/logs"); // mack logs
 
-        // Attach a listener to read the data at our posts reference
-        ref.addValueEventListener(new ValueEventListener() {
+        // logs data retrieve and display
+        logsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // pull all data of current user
-                User user = dataSnapshot.getValue(User.class);
-                Log.d(TAG, String.valueOf(user));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d(TAG ,"The read failed: " + databaseError.getCode());
-            }
-        });
-
-        ref.orderByChild("profile").limitToFirst(1).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                String userID = String.valueOf(dataSnapshot.getKey());
-                Log.d(TAG + " userId key", userID);
-                userID_ET.setText(String.valueOf(userID));
-
-                ref.child("profile/firstName").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String user_firstname = String.valueOf(dataSnapshot.getValue());
-                        user_first_name_ET.setText(user_firstname);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                messageArea.setText("");
+                messageArea.setTextColor(Color.WHITE);
+                messageArea.setTextSize(12);
+                int i = 0;
+                for (DataSnapshot child: dataSnapshot.getChildren()) {
+                    i=i+1;
+                    messageArea.append("Entry "+i+":\n");
+                    String date = (String) child.child("date").getValue();
+                    messageArea.append(date+"\n");
+                    String intent = (String) child.child("intent").getValue();
+                    messageArea.append("Intent: "+intent+"\n");
+                    String message = (String) child.child("message").getValue();
+                    messageArea.append("Message: "+message+"\n");
+                    String speaker = (String) child.child("speaker").getValue();
+                    messageArea.append("Source: "+speaker+"\n\n");
+                }
 
             }
 
@@ -99,10 +92,27 @@ public class CrystalMainActivity extends AppCompatActivity {
         });
 
 
+        //user first name retrieve and display
+        final TextView loggedInUser = (TextView) findViewById(R.id.logged_in_user);
+        final DatabaseReference userProfileRef = FirebaseDatabase.getInstance().getReference("crystalCubes/crystal_chan_6/user/ff629b29-9e3a-4de3-9304-2bf209dd9c39/profile");
+
+        userProfileRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name = (String) dataSnapshot.child("firstName").getValue();
+                loggedInUser.setText("Logged in: "+name);
+                loggedInUser.setTextSize(14);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         // adapter view for drop down ===================================
         Spinner mySpinner= (Spinner) findViewById(R.id.spinner_view);
-        String[] crystalFunctions = {"Home", "Reminder", "Music", "To-do List", "Weather"};
+        String[] crystalFunctions = {"Home", "To-do List"};
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, crystalFunctions);
 
@@ -113,17 +123,13 @@ public class CrystalMainActivity extends AppCompatActivity {
         AdapterView.OnItemSelectedListener myOISL = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //todo connect to cloud for functionality
-                //todo create activity for each functions
-                //Toast.makeText(CrystalMainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
-                //Toast.makeText(CrystalMainActivity.this, ""+i , Toast.LENGTH_SHORT).show();
 
-                Intent mIntent;
+                Intent todoIntent;
 
                 switch (i) {
-                    case 4 :
-                        mIntent = new Intent(CrystalMainActivity.this, WeatherActivity.class);
-                        startActivity(mIntent);
+                    case 1 : // launch to do list launcher
+                        todoIntent= new Intent(CrystalMainActivity.this, ToDoListActivity.class);
+                        startActivity(todoIntent);
                         break;
                 }
             }

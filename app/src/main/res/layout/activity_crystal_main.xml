@@ -18,7 +18,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_width="30dp"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:id="@+id/option_button" />
 
     <Spinner
         android:id="@+id/spinner_view"
@@ -37,40 +38,32 @@
         android:elevation="4dp"
         tools:background="spinner_" />
 
+
     <TextView
-        android:text="User ID:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/user_id_label"
-        android:layout_below="@+id/imageButton"
+        android:id="@+id/tv_long"
+        android:layout_width="match_parent"
+        android:scrollbars = "vertical"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="121dp"
-        android:textSize="16sp"
-        android:textColor="@color/common_google_signin_btn_text_dark_default" />
+        android:layout_height="490dp">
+    </TextView>
 
-    <EditText
+    <TextView
+        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/user_name_edit_text"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/user_id_edit_text"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"/>
+        android:id="@+id/logged_in_user"
+        android:layout_below="@+id/option_button"
+        android:layout_alignParentStart="true" />
 
-    <EditText
+    <TextView
+        android:text="Logs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/user_id_edit_text"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:layout_alignBaseline="@+id/user_id_label"
-        android:layout_alignBottom="@+id/user_id_label"
-        android:layout_alignStart="@+id/user_name_edit_text" />
-
+        android:id="@+id/textView2"
+        android:textSize="24sp"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:layout_below="@+id/logged_in_user"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
