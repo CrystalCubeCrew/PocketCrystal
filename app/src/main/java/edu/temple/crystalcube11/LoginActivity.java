@@ -244,8 +244,6 @@ public class LoginActivity extends AppCompatActivity implements
             Bitmap photo_bitmap = (Bitmap) extras.get("data");
 
 
-//todo get full size captured image
-
             String photoString = getStringFromBitmap(photo_bitmap);
 
             // send photo string to method to be post to server
