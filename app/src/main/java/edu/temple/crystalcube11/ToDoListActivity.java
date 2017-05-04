@@ -13,10 +13,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -162,23 +164,31 @@ public class ToDoListActivity extends AppCompatActivity {
     }
 
     public void deleteTask(View view) {
+        // get task and convert to string
         View parent = (View) view.getParent();
         TextView taskTextView = (TextView) parent.findViewById(R.id.task_title);
-        final String task = String.valueOf(taskTextView.getText());
+        final String doneTask = String.valueOf(taskTextView.getText());
 
-        taskRef = userDataRef.child("todolist").getRef();
-
-        taskRef.addValueEventListener(new ValueEventListener() {
+        // find task and delete
+        Query queryRef = userDataRef.child("todolist").orderByChild("task").equalTo(doneTask);
+        queryRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // content come as hash map, store as list of todoList object
-                List<ToDoList> todoList = new ArrayList<>();
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    todoList.add(child.getValue(ToDoList.class));
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                dataSnapshot.getRef().setValue(null);
+            }
 
-                    Log.d("delete task: ", String.valueOf(child.getValue()));
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
             }
 
