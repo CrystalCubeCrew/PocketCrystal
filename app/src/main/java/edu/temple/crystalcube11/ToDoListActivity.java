@@ -71,26 +71,26 @@ public class ToDoListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_add_task:
                 Log.d(TAG, "Add a new task");
-            // generate dialogue
-            final EditText taskEditText = new EditText(this);
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle("Add a new task")
-                    .setMessage("What do you want to do next?")
-                    .setView(taskEditText)
-                    .setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            String task = String.valueOf(taskEditText.getText());
-                            Log.d(TAG, "Task to add: " + task);
-                            // insert to firebase
-                            insertTaskToFirebase(task);
-                            updateUI();
+                // generate dialogue
+                final EditText taskEditText = new EditText(this);
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setTitle("Add a new task")
+                        .setMessage("What do you want to do next?")
+                        .setView(taskEditText)
+                        .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String task = String.valueOf(taskEditText.getText());
+                                Log.d(TAG, "Task to add: " + task);
+                                // insert to firebase
+                                insertTaskToFirebase(task);
+                                updateUI();
 
-                        }
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .create();
-            dialog.show();
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .create();
+                dialog.show();
 
                 return true;
 
@@ -129,13 +129,13 @@ public class ToDoListActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // content come as hash map, store are list of todoList object
                 List<ToDoList> todoList = new ArrayList<>();
-                for (DataSnapshot child: dataSnapshot.getChildren()) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
                     todoList.add(child.getValue(ToDoList.class));
                 }
 
                 // add task from list of todoList object to array list of string
                 ArrayList<String> taskList = new ArrayList<>();
-                for(int i=0;i<todoList.size();i++){
+                for (int i = 0; i < todoList.size(); i++) {
                     taskList.add(todoList.get(i).getTask());
                 }
 
@@ -171,14 +171,12 @@ public class ToDoListActivity extends AppCompatActivity {
         taskRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // content come as hash map, store are list of todoList object
+                // content come as hash map, store as list of todoList object
                 List<ToDoList> todoList = new ArrayList<>();
-                for (DataSnapshot child: dataSnapshot.getChildren()) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
                     todoList.add(child.getValue(ToDoList.class));
-                    if(task.equals(String.valueOf(child.getValue()))) {
-                        //todo findout why string compare not working; need for remove task off firebase
-                        Log.d("delete task", String.valueOf(child.getValue()));
-                    }
+
+                    Log.d("delete task: ", String.valueOf(child.getValue()));
 
                 }
 

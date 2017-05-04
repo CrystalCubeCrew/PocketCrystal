@@ -1,43 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
     tools:context="edu.temple.crystalcube11.OptionActivity">
 
 
     <Button
-        android:text="Setup Facial Recognition Login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/face_login_setup"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="83dp" />
-
-    <Button
-        android:text="Log Out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/logout" />
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="83dp"
+        android:text="Setup Facial Recognition Login" />
 
     <Button
-        android:text="Edit Profile"
+        android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:id="@+id/button4"
-        android:layout_below="@+id/face_login_setup"
-        android:layout_alignStart="@+id/face_login_setup" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="Log Out" />
 
     <TextView
+        android:id="@+id/logged_in_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/logged_in_user"
         android:layout_alignBaseline="@+id/logout"
         android:layout_alignBottom="@+id/logout"
         android:layout_alignStart="@+id/face_login_setup"

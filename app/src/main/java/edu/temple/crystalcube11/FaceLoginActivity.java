@@ -1,6 +1,5 @@
 package edu.temple.crystalcube11;
 
-import android.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,8 +34,8 @@ import java.util.Map;
  */
 
 public class FaceLoginActivity extends AppCompatActivity {
-    private Button faceCapture;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private Button faceCapture;
     private String TAG2 = "JSONpost";
     private EditText firstName;
     private EditText lastName;
@@ -115,8 +114,7 @@ public class FaceLoginActivity extends AppCompatActivity {
 
             // send photo string to method to be post to server
             sendJson(photoString);
-
-            // check if user have profile
+            finish();
 
         }
     }
@@ -126,7 +124,7 @@ public class FaceLoginActivity extends AppCompatActivity {
         // Instantiate the RequestQueue.
         final Context context = getApplicationContext();
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://ec2-34-207-95-183.compute-1.amazonaws.com/createUser";
+        String url = "<34.206.165.219>/createUser";
 
         HashMap<String, String> postParam = new HashMap<String, String>();
         postParam.put("file", photo);
@@ -142,7 +140,7 @@ public class FaceLoginActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         // your response
                         Log.d(TAG2, response.toString());
-                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
 
