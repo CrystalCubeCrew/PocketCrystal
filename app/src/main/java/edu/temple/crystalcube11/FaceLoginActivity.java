@@ -40,16 +40,27 @@ public class FaceLoginActivity extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
 
+    private String firstname;
+    private String lastname;
+    private String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_login);
+
+        Bundle extra = getIntent().getExtras();
+        firstname = extra.getString("firstname");
+        lastname = extra.getString("lastname");
+        uid = extra.getString("uid");
 
         // front camera face capture ==============================================================
         faceCapture = (Button) findViewById(R.id.face_camera_btn);
 
         firstName = (EditText) findViewById(R.id.firstname_edit_text);
         lastName = (EditText) findViewById(R.id.lastname_edit_text);
+        firstName.setText(firstname);
+        lastName.setText(lastname);
 
         faceCapture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,14 +135,16 @@ public class FaceLoginActivity extends AppCompatActivity {
         // Instantiate the RequestQueue.
         final Context context = getApplicationContext();
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "<34.206.165.219>/createUser";
+        final String url = "http://34.206.165.219/createUser";
 
         HashMap<String, String> postParam = new HashMap<String, String>();
         postParam.put("file", photo);
         postParam.put("fileName", "face.png");
         postParam.put("firstName", firstName.getText().toString());
         postParam.put("lastName", lastName.getText().toString());
+        // todo change hardcoded crystal cube id
         postParam.put("machineId", "crystal_chan_6");
+        postParam.put("gmail", uid);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
                 url, new JSONObject(postParam),

@@ -14,7 +14,9 @@ public class OptionActivity extends AppCompatActivity{
     private Button setupFaceLogin;
     private Button logout;
     private TextView loggedInUser;
-    private String loggedIn;
+    private String firstname;
+    private String lastname;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +29,20 @@ public class OptionActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Intent faceloginIntent = new Intent(OptionActivity.this, FaceLoginActivity.class);
-                faceloginIntent.putExtra("gmail", loggedIn);
+                faceloginIntent.putExtra("lastname", lastname);
+                faceloginIntent.putExtra("firstname", firstname);
+                faceloginIntent.putExtra("uid", uid);
                 startActivity(faceloginIntent);
             }
         });
 
         // logged in user
         Bundle extras = getIntent().getExtras();
-        loggedIn = extras.getString("gmail");
+        firstname = extras.getString("firstname");
+        lastname = extras.getString("lastname");
+        uid = extras.getString("uid");
         loggedInUser = (TextView) findViewById(R.id.logged_in_user);
-        loggedInUser.setText("Logged in: " + loggedIn);
+        loggedInUser.setText("Logged in: " + firstname);
         loggedInUser.setTextSize(15);
 
 

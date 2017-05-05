@@ -43,6 +43,8 @@ public class ToDoListActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> mAdapter;
 
+    private String loggedInUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,21 +52,21 @@ public class ToDoListActivity extends AppCompatActivity {
 
         databaseRef = FirebaseDatabase.getInstance().getReference(); // root ref
 
-
-        // todo grab user id from login to use it to get user data reference
-        userDataRef = FirebaseDatabase.getInstance().getReference("crystalCubes/crystal_chan_6/user/ff629b29-9e3a-4de3-9304-2bf209dd9c39");
+        Bundle extra = getIntent().getExtras();
+        loggedInUser = extra.getString("uid");
+        userDataRef = FirebaseDatabase.getInstance().getReference("crystalCubes/crystal_chan_6/user/" + loggedInUser);
 
         mTaskListView = (ListView) findViewById(R.id.list_todo);
 
         // pull list from firebase and display in list view
         updateUI();
 
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.todo_menu, menu);
+        setTitle("To-Do List");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -124,8 +126,6 @@ public class ToDoListActivity extends AppCompatActivity {
 
     private void updateUI() {
         taskRef = userDataRef.child("todolist").getRef();
-
-        //todo iterate thru firebase todolist node for task with "task" key
         taskRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

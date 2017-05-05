@@ -20,12 +20,23 @@ public class CrystalMainActivity extends AppCompatActivity {
 
     TextView messageArea;
 
-    private String loggedInUserString;
+    private String uid;
+    private String firstname;
+    private String lastname;
+
+    private TextView loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crystal_main);
+
+        //get extras from login activity
+        loggedInUser = (TextView) findViewById(R.id.logged_in_user);
+        Bundle extras = getIntent().getExtras();
+        uid = extras.getString("uid");
+        firstname = extras.getString("firstname");
+        lastname = extras.getString("lastname");
 
         // scrolling text view for logs
         messageArea = (TextView) findViewById(R.id.tv_long);
@@ -34,8 +45,7 @@ public class CrystalMainActivity extends AppCompatActivity {
         // read firebase data =========================
         // Get a reference to our users
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //todo change ff629b29-9e3a-4de3-9304-2bf209dd9c39 to loggedInUser
-        final DatabaseReference logsRef = database.getReference("crystalCubes/crystal_chan_6/user/ff629b29-9e3a-4de3-9304-2bf209dd9c39/logs"); // mack profile
+        final DatabaseReference logsRef = database.getReference("crystalCubes/crystal_chan_6/user/" + uid + "/logs");
 
         // logs data retrieve and display
         logsRef.addValueEventListener(new ValueEventListener() {
@@ -66,12 +76,8 @@ public class CrystalMainActivity extends AppCompatActivity {
             }
         });
 
-
-        //logged in gmail
-        final TextView loggedInUser = (TextView) findViewById(R.id.logged_in_user);
-        Bundle extras = getIntent().getExtras();
-        loggedInUserString = extras.getString("gmail");
-        loggedInUser.setText("Logged in: " + loggedInUserString);
+        // set logged in user
+        loggedInUser.setText("Logged in: " + firstname);
         loggedInUser.setTextSize(14);
 
 
@@ -89,14 +95,20 @@ public class CrystalMainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.option:
                 Intent optionIntent = new Intent(CrystalMainActivity.this, OptionActivity.class);
-                optionIntent.putExtra("gmail", loggedInUserString);
+                optionIntent.putExtra("firstname", firstname);
+                optionIntent.putExtra("lastname", lastname);
+                optionIntent.putExtra("uid", uid);
                 startActivity(optionIntent);
                 return true;
             case R.id.todolist:
                 Intent todolistIntent = new Intent(CrystalMainActivity.this, ToDoListActivity.class);
-                todolistIntent.putExtra("gmail", loggedInUserString);
+                todolistIntent.putExtra("uid", uid);
                 startActivity(todolistIntent);
                 return true;
+            case R.id.contact:
+                Intent contactIntent = new Intent(getApplicationContext(), ContactActivity.class);
+                contactIntent.putExtra("uid", uid);
+                startActivity(contactIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }
